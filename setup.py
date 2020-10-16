@@ -12,14 +12,14 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
+from setuptools import setup
 from distutils.cmd import Command
+import os
+from pkg_resources import resource_filename
+from grpc_tools import protoc
 from setuptools.command.sdist import sdist
 from distutils.dir_util import copy_tree
 import shutil
-from pkg_resources import resource_filename
-import os
-from setuptools import setup, find_packages
-from os import environ
 from pathlib import Path
 from lib2to3.main import main as convert2to3
 
@@ -53,7 +53,6 @@ class ProtoGenerator(Command):
         protos_include = [f'--proto_path={proto_path}'] + \
                          [f'--proto_path={resource_filename(x[0], x[1])}' for x in protos]
 
-        from grpc_tools import protoc
         for proto_file in proto_files:
             command = ['grpc_tools.protoc'] + \
                       protos_include + \
@@ -91,7 +90,7 @@ with open('README.md', 'r') as file:
 setup(
     name=package_name,
     version=package_version,
-    url='https://gitlab.exactpro.com/vivarium/th2/th2-core-open-source/grpc-generator-template',
+    url='https://gitlab.exactpro.com/vivarium/th2/th2-core-open-source/th2-grpc-generator-template',
     license='Apache License 2.0',
     author='TH2-devs',
     python_requires='>=3.7',
