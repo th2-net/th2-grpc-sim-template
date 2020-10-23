@@ -6,15 +6,14 @@ Fork this project and follow instructions.
 This tool generates code from `.proto` files and upload constructed packages (`.proto` files with generated code) to desired repositories.
 
 ### How to use:
-1. Edit `rootProject.name` variable in `settings.gradle file`. This will be the name of Java package.
-2. Edit `package_name` variable in `setup.py`. This will be the name of Python package. <br>
-You can also edit parameters of `setup.py` in `setup` function invocation such as: `url`, `author`, `author_email`, `description`. <br> 
-Do not edit the others.
-3. Create a directory with the name `package_name` (as in Python) under `src/main/proto` directory (remove example files `Foo.proto` and `Bar.proto` if present).
-4. Place your own `.proto` files in created directory.
-5. Edit imports in your `.proto` files so that they look like <br>
+1. Edit `rootProject.name` variable in `settings.gradle` file. This will be the name of Java package.
+2. Edit `package_info.json` file in order to specify package name and version for Python package (create file if it's absent).
+3. Edit parameters of `setup.py` in `setup` function invocation such as: `author`, `author_email`, `url`. Do not edit the others.
+4. Create a directory with the name `package_name` (as in Python) under `src/main/proto` directory (remove example files `Foo.proto` and `Bar.proto` if present).
+5. Place your own `.proto` files in created directory.
+6. Edit imports in your `.proto` files so that they look like <br>
 `import "{package_name}/{proto_file_name}.proto"`
-6. Edit paths in `python-service-generator` stage in Dockerfile. They should correspond to the project structure.
+7. Edit paths in `python-service-generator` stage in Dockerfile. They should correspond to the project structure.
 
 #### Docker
 You can run everything via Docker:
@@ -55,11 +54,8 @@ gradle --no-daemon clean build artifactoryPublish \
 `release_version` is the version of resulting package and `artifactory_user`, `artifactory_password`, `artifactory_deploy_repo_key`, `artifactory_url` are parameters of artifactory.
 
 #### Python
-If you wish to manually create and publish package then you should:
-1. Edit `version.info` file in order to specify package version (create file if it's absent)
-2. Run these commands:
+If you wish to manually create and publish package, run these commands:
 ```
-pip install -r requirements.txt
 python setup.py generate
 python setup.py sdist
 twine upload --repository-url ${pypi_repository_url} --username ${pypi_user} --password ${pypi_password} dist/*
