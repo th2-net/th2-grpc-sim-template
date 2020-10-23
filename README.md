@@ -41,7 +41,7 @@ Parameters:
 - `PYPI_PASSWORD` - password for Python package repository
 - `APP_VERSION` - version of Python package
 
-#### Java:
+#### Java
 If you wish to manually create and publish package, run these command:
 ``` 
 gradle --no-daemon clean build artifactoryPublish \
