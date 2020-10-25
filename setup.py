@@ -82,7 +82,7 @@ class CustomDist(sdist):
 with open('package_info.json', 'r') as file:
     package_info = json.load(file)
 
-package_name = package_info['package_name']
+package_name = package_info['package_name'].replace('-', '_')
 package_version = package_info['package_version']
 
 with open('README.md', 'r') as file:
