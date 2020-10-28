@@ -17,7 +17,7 @@ import json
 from distutils.cmd import Command
 import os
 from pkg_resources import resource_filename
-from grpc_tools import protoc
+from distutils.sysconfig import get_python_lib
 from setuptools.command.sdist import sdist
 from distutils.dir_util import copy_tree
 from shutil import rmtree
@@ -52,8 +52,10 @@ class ProtoGenerator(Command):
 
         protos = [('grpc_tools', '_proto')]
         protos_include = [f'--proto_path={proto_path}'] + \
-                         [f'--proto_path={resource_filename(x[0], x[1])}' for x in protos]
+                         [f'--proto_path={resource_filename(x[0], x[1])}' for x in protos] + \
+                         [f'--proto_path={get_python_lib()}']
 
+        from grpc_tools import protoc
         for proto_file in proto_files:
             command = ['grpc_tools.protoc'] + \
                       protos_include + \
@@ -79,6 +81,12 @@ class CustomDist(sdist):
         rmtree(package_name, ignore_errors=True)
 
 
+def get_dependency(dependency_name, dependency_version,
+                   dependency_repository='https://nexus.exactpro.com/repository/th2-pypi/packages/'):
+    return f"{dependency_name} @ {dependency_repository}{dependency_name}/{dependency_version}/" \
+           f"{dependency_name.replace('-', '_')}-{dependency_version}.tar.gz"
+
+
 with open('package_info.json', 'r') as file:
     package_info = json.load(file)
 
@@ -100,9 +108,9 @@ setup(
     license='Apache License 2.0',
     python_requires='>=3.7',
     install_requires=[
-        'grpcio-tools',
-        'google-api-core',
-        'twine'
+        'grpcio-tools==1.33.1',
+        'google-api-core==1.23.0',
+        'twine==3.2.0'
     ],
     packages=['', package_name],
     package_data={'': ['package_info.json'], package_name: ['*.proto']},

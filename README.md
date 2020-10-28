@@ -56,6 +56,7 @@ gradle --no-daemon clean build artifactoryPublish \
 #### Python
 If you wish to manually create and publish package, run these commands:
 ```
+pip install -r requirements.txt
 python setup.py generate
 python setup.py sdist
 twine upload --repository-url ${pypi_repository_url} --username ${pypi_user} --password ${pypi_password} dist/*
