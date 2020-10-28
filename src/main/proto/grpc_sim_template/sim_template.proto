@@ -14,22 +14,20 @@
  * limitations under the License.
  */
 
-syntax = "proto3";
+syntax = 'proto3';
 
-import "grpc_generator_template/Foo.proto";
-import "google/protobuf/empty.proto";
+import "grpc_sim/sim.proto";
+import "grpc_common/common.proto";
 
 option java_multiple_files = true;
-option java_package = "com.exactpro.th2.generator.grpc";
+option java_package = "com.exactpro.th2.sim.template.grpc";
 
-service BarService {
-  rpc BarRequest(Bar) returns (Bar) {
-  }
-
-  rpc EmptyRequest(Bar) returns (google.protobuf.Empty) {
-  }
+message TemplateFixCreate {
+    map<string, Value> fields = 1;
+    ConnectionID connection_id = 2;
 }
 
-message Bar {
-  Foo foo = 1;
+service TemplateSimulatorService {
+    rpc createRuleFIX(TemplateFixCreate) returns (RuleID) {}
+    rpc createKotlinRuleFIX(TemplateFixCreate) returns (RuleID) {}
 }

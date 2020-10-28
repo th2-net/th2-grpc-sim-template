@@ -26,10 +26,10 @@ RUN gradle --no-daemon clean build artifactoryPublish \
 	-Partifactory_deploy_repo_key=${artifactory_deploy_repo_key} \
 	-Partifactory_url=${artifactory_url}
 
-FROM nexus.exactpro.com:9000/th2-python-service-generator:1.1.0 as generator
+FROM nexus.exactpro.com:9000/th2-python-service-generator:1.1.1 as generator
 WORKDIR /home/project
 COPY ./ .
-RUN /home/service/bin/service -p src/main/proto/grpc_generator_template -w PythonServiceWriter -o src/gen/main/python/grpc_generator_template
+RUN /home/service/bin/service -p src/main/proto/grpc_sim_template -w PythonServiceWriter -o src/gen/main/python/grpc_sim_template
 
 FROM python:3.8-slim as python
 ARG pypi_repository_url
