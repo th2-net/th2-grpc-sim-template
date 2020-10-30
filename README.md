@@ -24,6 +24,7 @@ docker build --tag {IMAGE_NAME}:{IMAGE_VERSION} . --build-arg release_version=${
                                                   --build-arg pypi_repository_url=${PYPI_REPOSITORY_URL}
                                                   --build-arg pypi_user=${PYPI_USER}
                                                   --build-arg pypi_password=${PYPI_PASSWORD}
+                                                  --build-arg app_name=${APP_NAME}
                                                   --build-arg app_version=${APP_VERSION}
 ```
 Parameters:
