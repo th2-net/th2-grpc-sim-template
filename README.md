@@ -1,11 +1,10 @@
 # GRPC Generator Template
 
-## Current supported languages: Java, Python
 Fork this project and follow instructions.
 
 This tool generates code from `.proto` files and upload constructed packages (`.proto` files with generated code) to desired repositories.
 
-### How to use:
+## How to use:
 1. Edit `rootProject.name` variable in `settings.gradle` file. This will be the name of Java package.
 2. Edit `package_info.json` file in order to specify package name and version for Python package (create file if it's absent).
 3. Edit parameters of `setup.py` in `setup` function invocation such as: `author`, `author_email`, `url`. Do not edit the others.
@@ -15,7 +14,24 @@ This tool generates code from `.proto` files and upload constructed packages (`.
 `import "{package_name}/{proto_file_name}.proto"`
 7. Edit paths in `python-service-generator` stage in Dockerfile. They should correspond to the project structure.
 
-#### Docker
+### Parameters
+- `IMAGE_NAME` - name of Docker image
+- `IMAGE_VERSION` - version of Docker image
+- `APP_VERSION` - version of Java package
+- `ARTIFACTORY_USER` - user for Java artifactory
+- `ARTIFACTORY_PASS` - password for Java artifactory
+- `ARTIFACTORY_REPO` - repository for Java artifactory
+- `ARTIFACTORY_URL` - URL for Java artifactory
+- `NEXUS_URL` - URL for Nexus (Java)
+- `NEXUS_USER` - user for Nexus (Java)
+- `NEXUS_PASS` - password for Nexus (Java)
+- `PYPI_REPOSITORY_URL` - URL for Python package repository
+- `PYPI_USER` - user for Python package repository
+- `PYPI_PASSWORD` - password for Python package repository
+- `APP_NAME` - name of Python package
+- `APP_VERSION` - version of Python package
+
+### Docker
 You can run everything via Docker:
 ```
 docker build --tag {IMAGE_NAME}:{IMAGE_VERSION} . --build-arg release_version=${APP_VERSION}
@@ -24,41 +40,34 @@ docker build --tag {IMAGE_NAME}:{IMAGE_VERSION} . --build-arg release_version=${
                                                   --build-arg artifactory_deploy_repo_key=${ARTIFACTORY_REPO}
                                                   --build-arg artifactory_url=${ARTIFACTORY_URL}
                                                   --build-arg pypi_repository_url=${PYPI_REPOSITORY_URL}
+                                                  --build-arg nexus_url=${NEXUS_URL}
+                                                  --build-arg nexus_user=${NEXUS_USER}
+                                                  --build-arg nexus_password=${NEXUS_PASS}
                                                   --build-arg pypi_user=${PYPI_USER}
                                                   --build-arg pypi_password=${PYPI_PASSWORD}
+                                                  --build-arg app_name=${APP_NAME}
                                                   --build-arg app_version=${APP_VERSION}
 ```
-Parameters:
-- `IMAGE_NAME` - name of Docker image
-- `IMAGE_VERSION` - version of Docker image
-- `APP_VERSION` - version of Java package
-- `ARTIFACTORY_USER` - user for Java artifactory
-- `ARTIFACTORY_PASS` - password for Java artifactory
-- `ARTIFACTORY_REPO` - repository for Java artifactory
-- `ARTIFACTORY_URL` - URL for Java artifactory
-- `PYPI_REPOSITORY_URL` - URL for Python package repository
-- `PYPI_USER` - user for Python package repository
-- `PYPI_PASSWORD` - password for Python package repository
-- `APP_VERSION` - version of Python package
 
-#### Java
+### Java
 If you wish to manually create and publish package, run these command:
 ``` 
-gradle --no-daemon clean build artifactoryPublish \
-       -Prelease_version=${release_version} \
-       -Partifactory_user=${artifactory_user} \
-       -Partifactory_password=${artifactory_password} \
-       -Partifactory_deploy_repo_key=${artifactory_deploy_repo_key} \
-       -Partifactory_url=${artifactory_url}
+gradle --no-daemon clean build publish artifactoryPublish \
+       -Prelease_version=${RELEASE_VERSION} \
+       -Partifactory_user=${ARTIFACTORY_USER} \
+       -Partifactory_password=${ARTIFACTORY_PASSWORD} \
+       -Partifactory_deploy_repo_key=${ARTIFACTORY_DEPLOY_REPO_KEY} \
+       -Partifactory_url=${ARTIFACTORY_URL} \
+       -Pnexus_url=${NEXUS_URL} \
+       -Pnexus_user=${NEXUS_USER} \
+       -Pnexus_password=${NEXUS_PASSWORD}
 ```
-`release_version` is the version of resulting package and `artifactory_user`, `artifactory_password`, `artifactory_deploy_repo_key`, `artifactory_url` are parameters of artifactory.
 
-#### Python
+### Python
 If you wish to manually create and publish package, run these commands:
 ```
 pip install -r requirements.txt
 python setup.py generate
 python setup.py sdist
-twine upload --repository-url ${pypi_repository_url} --username ${pypi_user} --password ${pypi_password} dist/*
+twine upload --repository-url ${PYPI_REPOSITORY_URL} --username ${PYPI_USER} --password ${PYPI_PASSWORD} dist/*
 ```
-`pypi_repository_url`, `pypi_user`, `pypi_password` are parameters of package repository. 

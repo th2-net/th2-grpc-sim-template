@@ -16,14 +16,20 @@
 
 syntax = "proto3";
 
+import "grpc_generator_template/Foo.proto";
+import "google/protobuf/empty.proto";
+
 option java_multiple_files = true;
 option java_package = "com.exactpro.th2.generator.grpc";
 
-service FooService {
-  rpc FooRequest(Foo) returns (Foo) {
+service BarService {
+  rpc BarRequest(Bar) returns (Bar) {
+  }
+
+  rpc EmptyRequest(Bar) returns (google.protobuf.Empty) {
   }
 }
 
-message Foo {
-  string foo = 1;
+message Bar {
+  Foo foo = 1;
 }
