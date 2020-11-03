@@ -16,18 +16,17 @@
 
 syntax = 'proto3';
 
-import "grpc_common/common.proto";
+import "th2_grpc_common/common.proto";
 import "grpc_sim/sim.proto";
 
 option java_multiple_files = true;
 option java_package = "com.exactpro.th2.sim.template.grpc";
 
-message TemplateFixCreate {
+message TemplateFixRuleCreate {
     map<string, Value> fields = 1;
     ConnectionID connection_id = 2;
 }
 
 service TemplateSimulatorService {
-    rpc createRuleFIX(TemplateFixCreate) returns (RuleID) {}
-    rpc createKotlinRuleFIX(TemplateFixCreate) returns (RuleID) {}
+    rpc createRuleFix(TemplateFixRuleCreate) returns (RuleID) {}
 }
