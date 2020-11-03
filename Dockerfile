@@ -33,7 +33,7 @@ RUN gradle --no-daemon clean build publish artifactoryPublish \
 	-Partifactory_url=${artifactory_url} \
     -Pnexus_url=${nexus_url} \
     -Pnexus_user=${nexus_user} \
-    -Pnexus_password=${nexus_password
+    -Pnexus_password=${nexus_password}
 
 FROM nexus.exactpro.com:9000/th2-python-service-generator:1.1.1 as python_service_generator
 WORKDIR /home/project
