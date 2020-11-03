@@ -2,17 +2,16 @@
 
 Fork this project and follow instructions.
 
-This tool generates code from `.proto` files and upload constructed packages (`.proto` files with generated code) to desired repositories.
+This tool generates code from `.proto` files and upload constructed packages (`.proto` files and generated code) to specified repositories.
 
 ## How to use:
-1. Edit `rootProject.name` variable in `settings.gradle` file. This will be the name of Java package.
-2. Edit `package_info.json` file in order to specify package name and version for Python package (create file if it's absent).
-3. Edit parameters of `setup.py` in `setup` function invocation such as: `author`, `author_email`, `url`. Do not edit the others.
-4. Create a directory with the name `package_name` (as in Python) under `src/main/proto` directory (remove example files `Foo.proto` and `Bar.proto` if present).
-5. Place your own `.proto` files in created directory.
-6. Edit imports in your `.proto` files so that they look like <br>
-`import "{package_name}/{proto_file_name}.proto"`
-7. Edit paths in `python-service-generator` stage in Dockerfile. They should correspond to the project structure.
+1. Create a directory with the name same as project name (replace dashes with underscores) under `src/main/proto` directory (remove other files and directories if they exist).
+2. Place your own `.proto` files in created directory. Pay attention to `package` specifier and `import` statements.
+3. Edit paths in `python_service_generator` stage in Dockerfile.
+4. Edit `rootProject.name` variable in `settings.gradle` file. This will be the name of Java package.
+5. Edit parameters of `setup.py` in `setup` function invocation such as: `author`, `author_email`, `url`. Do not edit the others.
+
+Note that the name of created directory under `src/main/proto` directory is used in Python (it's a package name) and Docker (in `python_service_generator` stage), so it should be the same in all places.
 
 ### Parameters
 - `IMAGE_NAME` - name of Docker image
@@ -48,9 +47,10 @@ docker build --tag {IMAGE_NAME}:{IMAGE_VERSION} . --build-arg release_version=${
                                                   --build-arg app_name=${APP_NAME}
                                                   --build-arg app_version=${APP_VERSION}
 ```
+See [Parameters](#parameters) section.
 
 ### Java
-If you wish to manually create and publish package, run these command:
+If you wish to manually create and publish package for Java, run these command:
 ``` 
 gradle --no-daemon clean build publish artifactoryPublish \
        -Prelease_version=${RELEASE_VERSION} \
@@ -62,12 +62,16 @@ gradle --no-daemon clean build publish artifactoryPublish \
        -Pnexus_user=${NEXUS_USER} \
        -Pnexus_password=${NEXUS_PASSWORD}
 ```
+See [Parameters](#parameters) section.
 
 ### Python
-If you wish to manually create and publish package, run these commands:
+If you wish to manually create and publish package for Python:
+1. Edit `package_info.json` file in order to specify name and version for package (create file if it's absent).
+2. Run these commands:
 ```
 pip install -r requirements.txt
 python setup.py generate
 python setup.py sdist
 twine upload --repository-url ${PYPI_REPOSITORY_URL} --username ${PYPI_USER} --password ${PYPI_PASSWORD} dist/*
 ```
+See [Parameters](#parameters) section.
