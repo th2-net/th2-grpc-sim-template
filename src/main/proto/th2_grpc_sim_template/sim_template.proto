@@ -17,7 +17,7 @@
 syntax = 'proto3';
 
 import "th2_grpc_common/common.proto";
-import "grpc_sim/sim.proto";
+import "th2_grpc_sim/sim.proto";
 
 option java_multiple_files = true;
 option java_package = "com.exactpro.th2.sim.template.grpc";
