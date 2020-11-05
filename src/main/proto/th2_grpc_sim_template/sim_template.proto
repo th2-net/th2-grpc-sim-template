@@ -27,6 +27,6 @@ message TemplateFixRuleCreate {
     ConnectionID connection_id = 2;
 }
 
-service TemplateSimulatorService {
+service SimTemplate {
     rpc createRuleFix(TemplateFixRuleCreate) returns (RuleID) {}
 }
