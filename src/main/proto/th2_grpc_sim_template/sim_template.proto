@@ -28,5 +28,6 @@ message TemplateFixRuleCreate {
 }
 
 service SimTemplate {
+    rpc createDemoRule(TemplateFixRuleCreate) returns (RuleID) {}
     rpc createRuleFix(TemplateFixRuleCreate) returns (RuleID) {}
 }
