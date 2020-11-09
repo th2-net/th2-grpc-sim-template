@@ -1,4 +1,4 @@
-# GRPC Generator Template
+# gRPC Generator Template
 
 Fork this project and follow instructions.
 
