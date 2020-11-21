@@ -13,8 +13,6 @@ This tool generates code from `.proto` files and upload built packages (`.proto`
 
 Note that the name of created directory under `src/main/proto` directory is used in Python (it's a package name).
 
-See [Parameters](#parameters) section.
-
 ### Java
 If you wish to manually create and publish package for Java, run these command:
 ```
