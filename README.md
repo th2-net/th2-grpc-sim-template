@@ -5,11 +5,11 @@ Fork this project and follow instructions to start your custom project.
 This tool generates code from `.proto` files and upload built packages (`.proto` files and generated code) to specified repositories.
 
 ## How to use:
-#. Create a directory with the same name as project name (use underscores instead of dashes) under `src/main/proto` directory (remove other files and directories if they exist).
-#. Place your custom `.proto` files in created directory. Pay attention to `package` specifier and `import` statements.
-#. Edit `vcs_url` property in gradle.properties file. It will be published onto bintray repository.
-#. Edit `rootProject.name` variable in `settings.gradle` file. This will be the name of Java package.
-#. Edit parameters of `setup.py` in `setup` function invocation such as: `author`, `author_email`, `url`. Do not edit the others.
+1. Create a directory with the same name as project name (use underscores instead of dashes) under `src/main/proto` directory (remove other files and directories if they exist).
+1. Place your custom `.proto` files in created directory. Pay attention to `package` specifier and `import` statements.
+1. Edit `vcs_url` property in gradle.properties file. It will be published onto bintray repository.
+1. Edit `rootProject.name` variable in `settings.gradle` file. This will be the name of Java package.
+1. Edit parameters of `setup.py` in `setup` function invocation such as: `author`, `author_email`, `url`. Do not edit the others.
 
 Note that the name of created directory under `src/main/proto` directory is used in Python (it's a package name).
 
