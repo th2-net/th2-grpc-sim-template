@@ -69,10 +69,23 @@ class ProtoGenerator(Command):
 class CustomDist(sdist):
 
     def run(self):
-        copy_tree(f'src/main/proto/{package_name}', package_name)
-
         copy_tree(f'src/gen/main/python/{package_name}', package_name)
         Path(f'{package_name}/__init__.py').touch()
+        packages.append(package_name)
+
+        def make_packages(root_dir):
+            for path in Path(root_dir).iterdir():
+                if path.is_dir():
+                    path.joinpath('__init__.py').touch()
+                    packages.append(str(path))
+                    make_packages(path)
+
+        make_packages(package_name)
+
+        copy_tree(f'src/main/proto/{package_name}', f'{package_name}/proto')
+        proto_dirs = [x[0] for x in os.walk(f'{package_name}/proto')]
+        packages.extend(proto_dirs)
+        package_data.update(dict.fromkeys(proto_dirs, ['*.proto']))
 
         sdist.run(self)
 
@@ -87,6 +100,9 @@ package_version = package_info['package_version']
 
 with open('README.md', 'r') as file:
     long_description = file.read()
+
+packages = ['.']
+package_data = {'.': ['package_info.json']}
 
 
 setup(
@@ -103,8 +119,8 @@ setup(
     install_requires=[
         'grpcio-tools==1.33.1'
     ],
-    packages=['', package_name],
-    package_data={'': ['package_info.json'], package_name: ['*.proto']},
+    packages=packages,
+    package_data=package_data,
     cmdclass={
         'generate': ProtoGenerator,
         'sdist': CustomDist
