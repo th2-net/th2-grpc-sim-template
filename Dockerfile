@@ -35,11 +35,6 @@ RUN gradle --no-daemon clean build publish artifactoryPublish \
     -Pnexus_user=${nexus_user} \
     -Pnexus_password=${nexus_password}
 
-FROM nexus.exactpro.com:9000/th2-python-service-generator:1.1.1 as python_service_generator
-WORKDIR /home/project
-COPY ./ .
-RUN /home/service/bin/service -p src/main/proto/th2_grpc_generator_template -w PythonServiceWriter -o src/gen/main/python/th2_grpc_generator_template
-
 FROM python:3.8-slim as python_generator
 ARG pypi_repository_url
 ARG pypi_user
@@ -48,7 +43,7 @@ ARG app_name
 ARG app_version
 
 WORKDIR /home/project
-COPY --from=python_service_generator /home/project .
+COPY --from=java_generator /home/project .
 RUN printf '{"package_name":"%s","package_version":"%s"}' "$app_name" "$app_version" > "package_info.json" && \
     pip install -r requirements.txt && \
     python setup.py generate && \
