@@ -37,7 +37,7 @@ If you wish to manually create and publish package for Python:
     ```
        gradle --no-daemon clean generateProto
     ```
-    You can find generated files by path: `src/gen/main/services/python`
+    You can find the generated files by following path: `src/gen/main/services/python`
 2. Generate code from `.proto` files and publish everything:
     ```
     pip install -r requirements.txt
