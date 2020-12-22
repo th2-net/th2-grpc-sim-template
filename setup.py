@@ -72,6 +72,7 @@ class CustomDist(sdist):
         copy_tree(f'src/main/proto/{package_name}', package_name)
 
         copy_tree(f'src/gen/main/python/{package_name}', package_name)
+        copy_tree(f'src/gen/main/services/python/{package_name}', package_name)
         Path(f'{package_name}/__init__.py').touch()
 
         def make_packages(root_dir):
