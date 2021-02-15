@@ -32,7 +32,7 @@ targetCompatibility = 11
 ext {
     grpcVersion                 = '1.32.1'
     protobufVersion             = '3.13.0'
-    serviceGeneratorVersion     = '3.1.2'
+    serviceGeneratorVersion     = '3.1.4'
 
     genDir              = file("${project.rootDir}/src/gen")
     sharedDir           = file("${project.rootDir}/shared")
@@ -53,7 +53,7 @@ repositories {
 }
 
 dependencies {
-    api platform('com.exactpro.th2:bom:2.3.+')
+    api platform('com.exactpro.th2:bom:2.10.1')
 
     api "com.google.protobuf:protobuf-java-util"
     api "io.grpc:grpc-stub"
@@ -89,7 +89,7 @@ protobuf {
             artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
         }
         services {
-            artifact = "com.exactpro.th2:grpc-service-generator:3.1.2:all@jar"
+            artifact = "com.exactpro.th2:grpc-service-generator:${serviceGeneratorVersion}:all@jar"
         }
     }
     generateProtoTasks.generatedFilesBaseDir = genDir
