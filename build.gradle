@@ -108,6 +108,12 @@ serviceGeneration {
     }
 }
 
+// prevent publish to Bintray from gitlab
+tasks.withType(PublishToMavenRepository) {
+    onlyIf {
+        (publication == publishing.publications.mavenJava)
+    }
+}
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -121,14 +127,24 @@ publishing {
             pom.withXml {
                 def root = asNode()
                 root.appendNode('name', rootProject.name)
-                root.appendNode('url', project.vcs_url)
+                root.appendNode('url', "${vcs_url}")
             }
         }
     }
+
     repositories {
         maven {
-            name = "localRepo"
+            name = 'localRepo'
             url = sharedDir
+        }
+//Nexus repo for publish from gitlab
+        maven {
+            name = 'nexusRepository'
+            credentials {
+                username = "${nexus_user}"
+                password = "${nexus_password}"
+            }
+            url = "${nexus_url}"
         }
     }
 }
@@ -142,7 +158,7 @@ bintray {
         name = rootProject.name
         userOrg = 'exactpro'
         licenses = ['Apache-2.0']
-        vcsUrl = project.vcs_url
+        vcsUrl = "${vcs_url}"
         version {
             name = project.version
             desc = project.version
