@@ -1,11 +1,3 @@
-ARG release_version
-ARG artifactory_user
-ARG artifactory_password
-ARG artifactory_deploy_repo_key
-ARG artifactory_url
-ARG nexus_url
-ARG nexus_user
-ARG nexus_password
 FROM gradle:6.6-jdk11 as java_generator
 WORKDIR /home/project
 ARG nexus_url
@@ -22,13 +14,11 @@ FROM python:3.8-slim as python_generator
 ARG pypi_repository_url
 ARG pypi_user
 ARG pypi_password
-ARG app_name
-ARG app_version
 
 WORKDIR /home/project
 COPY --from=java_generator /home/project .
-RUN printf '{"package_name":"%s","package_version":"%s"}' "$app_name" "$app_version" > "package_info.json" && \
-    pip install -r requirements.txt && \
+RUN pip install -r requirements.txt && \
+    pip install twine && \
     python setup.py generate && \
     python setup.py sdist && \
     twine upload --repository-url ${pypi_repository_url} --username ${pypi_user} --password ${pypi_password} dist/*
