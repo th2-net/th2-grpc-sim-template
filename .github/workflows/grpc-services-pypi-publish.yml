@@ -1,4 +1,4 @@
-name: Build and publish Python distributions to PyPI
+name: Build and publish Python distributions to PyPI. New gRPC generator
 
 on:
   push:
