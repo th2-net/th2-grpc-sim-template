@@ -32,7 +32,7 @@ targetCompatibility = 11
 ext {
     grpcVersion                 = '1.32.1'
     protobufVersion             = '3.13.0'
-    serviceGeneratorVersion     = '3.1.4'
+    serviceGeneratorVersion     = '3.1.5'
 
     genDir              = file("${project.rootDir}/src/gen")
     sharedDir           = file("${project.rootDir}/shared")
@@ -109,6 +109,12 @@ protobuf {
 
 compileJava.dependsOn.add('generateProto')
 
+// prevent publish to Bintray from gitlab
+tasks.withType(PublishToMavenRepository) {
+    onlyIf {
+        (publication == publishing.publications.mavenJava)
+    }
+}
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -126,34 +132,44 @@ publishing {
             }
         }
     }
+
     repositories {
         maven {
-            name = "localRepo"
+            name = 'localRepo'
             url = sharedDir
         }
+//Nexus repo for publish from gitlab
+        maven {
+            name = 'nexusRepository'
+            credentials {
+                username = "${nexus_user}"
+                password = "${nexus_password}"
+            }
+            url = "${nexus_url}"
+        }
     }
-}
-
-clean {
-    delete genDir
-    delete sharedDir
 }
 
 bintray {
     user = "${bintray_user}"
     key = "${bintray_key}"
-   	publications = ['bintrayPublication']
+    publications = ['bintrayPublication']
     pkg {
         repo = 'th2'
         name = rootProject.name
         userOrg = 'exactpro'
         licenses = ['Apache-2.0']
         vcsUrl = "${vcs_url}"
-   		version {
-			name = project.version
-			desc = project.version
-			released  = new Date()
-		}
+        version {
+            name = project.version
+            desc = project.version
+            released = new Date()
+        }
     }
     publish = true
+}
+
+clean {
+    delete genDir
+    delete sharedDir
 }
