@@ -113,11 +113,11 @@ setup(
     long_description_content_type='text/markdown',
     author='TH2-devs',
     author_email='th2-devs@exactprosystems.com',
-    url='https://github.com/th2-net/th2-grpc-sim-template',,
+    url='https://github.com/th2-net/th2-grpc-sim-template',
     license='Apache License 2.0',
     python_requires='>=3.7',
     install_requires=[
-        'th2-grpc-sim~=3.0.0'
+        'th2-grpc-sim~=3.0.0',
         'grpcio-tools==1.33.1'
     ],
     packages=packages,
