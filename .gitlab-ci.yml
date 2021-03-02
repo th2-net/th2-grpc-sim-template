@@ -1,7 +1,8 @@
 variables:
-  DOCKER_PUBLISH_ENABLED: "false"
+  DOCKER_PUBLISH_ENABLED: 'false'
 
 include:
-  - project: "vivarium/th2/pipelines"
+  - project: 'vivarium/th2/pipelines'
     ref: v2
-    file: "/.gitlab-ci-common.yml"
+    file: '/.gitlab-ci-common.yml'
+
