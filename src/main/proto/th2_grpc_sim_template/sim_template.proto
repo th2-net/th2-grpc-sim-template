@@ -31,4 +31,7 @@ service SimTemplate {
     rpc createRuleFixSecurity(TemplateFixRuleCreate) returns (RuleID) {}
     rpc createDemoRule(TemplateFixRuleCreate) returns (RuleID) {}
     rpc createRuleFix(TemplateFixRuleCreate) returns (RuleID) {}
+    rpc createOrderNewRule(TemplateFixRuleCreate) returns (RuleID) {}
+    rpc createOrderAmendRule(TemplateFixRuleCreate) returns (RuleID) {}
+    rpc createOrderCancelRule(TemplateFixRuleCreate) returns (RuleID) {}
 }
