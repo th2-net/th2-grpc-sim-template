@@ -28,10 +28,9 @@ message TemplateFixRuleCreate {
 }
 
 service SimTemplate {
-    rpc createRuleFixSecurity(TemplateFixRuleCreate) returns (RuleID) {}
-    rpc createDemoRule(TemplateFixRuleCreate) returns (RuleID) {}
-    rpc createRuleFix(TemplateFixRuleCreate) returns (RuleID) {}
-    rpc createOrderNewRule(TemplateFixRuleCreate) returns (RuleID) {}
-    rpc createOrderAmendRule(TemplateFixRuleCreate) returns (RuleID) {}
-    rpc createOrderCancelRule(TemplateFixRuleCreate) returns (RuleID) {}
+    rpc createNOSRule(TemplateFixRuleCreate) returns (RuleID) {}
+    rpc createAmendRule(TemplateFixRuleCreate) returns (RuleID) {}
+    rpc createCancelRule(TemplateFixRuleCreate) returns (RuleID) {}
+    rpc createQuoteRule(TemplateFixRuleCreate) returns (RuleID) {}
+    rpc createSecurityRule(TemplateFixRuleCreate) returns (RuleID) {}
 }
