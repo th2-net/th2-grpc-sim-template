@@ -33,4 +33,5 @@ service SimTemplate {
     rpc createCancelRule(TemplateFixRuleCreate) returns (RuleID) {}
     rpc createQuoteRule(TemplateFixRuleCreate) returns (RuleID) {}
     rpc createSecurityRule(TemplateFixRuleCreate) returns (RuleID) {}
+    rpc createDemoScriptRule(TemplateFixRuleCreate) returns (RuleID) {}
 }
