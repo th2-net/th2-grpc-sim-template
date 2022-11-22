@@ -30,7 +30,8 @@ message TemplateFixRuleCreate {
 message CustomNOSRuleCreate {
     map<string, Value> fields = 1;
     ConnectionID connection_id = 2;
-    string property = 3;
+    string text_suffix1 = 3;
+    string text_suffix2 = 4;
 }
 
 service SimTemplate {
