@@ -27,6 +27,12 @@ message TemplateFixRuleCreate {
     ConnectionID connection_id = 2;
 }
 
+message CustomNOSRuleCreate {
+    map<string, Value> fields = 1;
+    ConnectionID connection_id = 2;
+    string property = 3;
+}
+
 service SimTemplate {
     rpc createNOSRule(TemplateFixRuleCreate) returns (RuleID) {}
     rpc createAmendRule(TemplateFixRuleCreate) returns (RuleID) {}
@@ -34,4 +40,5 @@ service SimTemplate {
     rpc createQuoteRule(TemplateFixRuleCreate) returns (RuleID) {}
     rpc createSecurityRule(TemplateFixRuleCreate) returns (RuleID) {}
     rpc createDemoScriptRule(TemplateFixRuleCreate) returns (RuleID) {}
+    rpc createCustomNOSRule(CustomNOSRuleCreate) returns (RuleID) {}
 }
