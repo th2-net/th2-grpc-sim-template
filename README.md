@@ -38,5 +38,9 @@ If you wish to manually create and publish package for Python:
 
 ## Release notes
 
+### 3.2.0
++ Update libraries versions.
++ Vulnerability check pipeline step.
+
 ### 3.1.2
 + Update libraries versions.
