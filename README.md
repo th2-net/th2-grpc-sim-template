@@ -38,5 +38,14 @@ If you wish to manually create and publish package for Python:
 
 ## Release notes
 
+### 3.2.0
+
++ Update to `th2-bom` version `4.4.0`
++ Update to `grpc-sim` version `5.1.0`
++ Update to `grpc-common` version `4.3.0`
++ Update to `th2-grpc-service-genrator` version `3.4.0`
++ Update to `grpcio-tools` version `1.56.0`
+
 ### 3.1.2
+
 + Update libraries versions.
