@@ -12,7 +12,5 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-
-grpcio-tools==1.56.0
 th2-grpc-sim~=5.1.0.dev
 th2-grpc-common~=4.3.0.dev
