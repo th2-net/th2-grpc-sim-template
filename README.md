@@ -38,6 +38,10 @@ If you wish to manually create and publish package for Python:
 
 ## Release notes
 
+### 3.3.0
+
++ Added `createDemoRuleCancelReplace` rpc method
+
 ### 3.2.0
 
 + Update to `th2-bom` version `4.5.0`
