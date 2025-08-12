@@ -38,6 +38,15 @@ If you wish to manually create and publish package for Python:
 
 ## Release notes
 
+### 3.4.0
+
+Migrated to th2 gradle plugin: 0.3.4 (bom: 4.13.1)
+
+Updated:
+* grpcio-tools ~= 1.74.0
+* th2-grpc-common ~= 4.7.1 
+* th2-grpc-sim ~= 5.2.1rc16832351661
+
 ### 3.2.0
 + Update libraries versions.
 + Vulnerability check pipeline step.
