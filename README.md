@@ -44,12 +44,22 @@ Migrated to th2 gradle plugin: 0.3.4 (bom: 4.13.1)
 
 Updated:
 * grpcio-tools ~= 1.74.0
-* th2-grpc-common ~= 4.7.1 
+* th2-grpc-common ~= 4.7.1
 * th2-grpc-sim ~= 5.2.1rc16832351661
 
+### 3.3.0
+
++ Added `createDemoRuleCancelReplace` rpc method
+
 ### 3.2.0
-+ Update libraries versions.
-+ Vulnerability check pipeline step.
+
++ Update to `th2-bom` version `4.5.0`
++ Update to `grpc-sim` version `5.1.0`
++ Update to `grpc-common` version `4.3.0`
++ Update to `th2-grpc-service-genrator` version `3.4.0`
++ Update to `grpcio-tools` version `1.56.0`
+
 
 ### 3.1.2
+
 + Update libraries versions.

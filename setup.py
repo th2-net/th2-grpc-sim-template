@@ -106,7 +106,6 @@ setup(
     license='Apache License 2.0',
     python_requires='>=3.7',
     install_requires=[
-        'grpcio-tools~=1.74.0',
         'th2-grpc-common~=4.7.1',
         'th2-grpc-sim~=5.2.1rc16832351661'
     ],
