@@ -38,6 +38,15 @@ If you wish to manually create and publish package for Python:
 
 ## Release notes
 
+### 3.4.0
+
+Migrated to th2 gradle plugin: 0.3.4 (bom: 4.13.1)
+
+Updated:
+* grpcio-tools ~= 1.74.0
+* th2-grpc-common ~= 4.7.1
+* th2-grpc-sim ~= 5.2.1rc16832351661
+
 ### 3.3.0
 
 + Added `createDemoRuleCancelReplace` rpc method
@@ -49,6 +58,7 @@ If you wish to manually create and publish package for Python:
 + Update to `grpc-common` version `4.3.0`
 + Update to `th2-grpc-service-genrator` version `3.4.0`
 + Update to `grpcio-tools` version `1.56.0`
+
 
 ### 3.1.2
 
