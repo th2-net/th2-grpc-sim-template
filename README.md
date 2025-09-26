@@ -38,6 +38,11 @@ If you wish to manually create and publish package for Python:
 
 ## Release notes
 
+### 3.5.0
+
+* Updated th2 gradle plugin: `0.3.8` (bom: 4.14.1)
+* Added [[GH-18] Added `TemplateFixRuleCreate.session_aliases` filed](https://github.com/th2-net/th2-grpc-sim-template/issues/18)
+
 ### 3.4.0
 
 Migrated to th2 gradle plugin: 0.3.4 (bom: 4.13.1)
